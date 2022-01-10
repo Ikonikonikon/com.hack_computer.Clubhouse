@@ -1,2 +1,2197 @@
 
-
+Documentation Settings
+ENVIRONMENT
+No Environment
+LANGUAGE
+Python - http.client
+CLUBHOUSE API
+Introduction
+Authentication
+Start
+Authentication
+Other
+User
+Channel ( Room )
+Club
+Clubhouse API
+
+
+Clubhouse is a new type of network based on voice. When you open the app you can see “rooms” full of people talking—all open so you can hop in and out, exploring different conversations. You enter each room as an audience member, but if you want to talk you just raise your hand, and the speakers can choose to invite you up. Or you can create a room of your own.
+
+It’s a place to meet with friends and with new people around the world—to tell stories, ask questions, debate, learn, and have impromptu conversations on thousands of different topics.
+
+Authentication
+There is a multi-level authentication by phone number :
+
+Check user's status and send verification code via SMS ( or call the person to say verification code )
+Check verification code and deliver auth_token, access_token and refresh_token
+Start
+At first you need some collection variables :
+
+auth_token
+user_id
+Phone number
+Email address
+There is a script in Complete request to set auth_token and user_id. Otherwise, enter them manually.
+
+Also, you need to set your phone number and email address.
+
+Support
+ 
+
+
+
+
+Contributing & Issues
+Each project may have many problems. Contributing to the better development of this project by reporting them.
+
+Email: info@arash-hatami.ir
+Website: https://arash-hatami.ir
+
+Authentication
+There is a multi-level authentication by phone number :
+
+Check user's status
+Call person to say verification code
+Receive verification code and deliver auth_token, access_tokenand refresh_token
+POSTCheck
+https://www.clubhouseapi.com/api/start_phone_number_auth
+Check user's status and send verification code via SMS.
+
+HEADERS
+CH-Languages
+en-US
+CH-Locale
+en_US
+Accept
+application/json
+Accept-Encoding
+gzip, deflate
+CH-AppBuild
+304
+CH-AppVersion
+0.1.28
+User-Ag
+
+Example Request
+Successful
+View More
+import http.client
+import json
+
+conn = http.client.HTTPSConnection("www.clubhouseapi.com")
+payload = json.dumps({
+  "phone_number": "+989123456789"
+})
+headers = {
+  'CH-Languages': 'en-US',
+  'CH-Locale': 'en_US',
+  'Accept': 'application/json',
+Example Response
+BodyHeader
+(0)
+{
+  "success": true,
+  "is_blocked": false,
+  "error_message": null
+}
+POSTCall
+https://www.clubhouseapi.com/api/call_phone_number_auth
+Call the person and send verification message if SMS not delivered.
+
+HEADERS
+CH-Languages
+en-US
+CH-Locale
+en_US
+Accept
+application/json
+Accept-Encoding
+gzip, deflate
+CH-AppBuild
+304
+CH-AppVersion
+0.1.28
+User-Agent
+clubhouse/304 (iPhone; iOS 14.4; Scale/2.00)
+Connection
+close
+Content-Type
+application/json; charset=utf-8
+BODYraw
+{
+    "phone_number": ""
+}
+
+
+Example Request
+Successful
+View More
+import http.client
+import json
+
+conn = http.client.HTTPSConnection("www.clubhouseapi.com")
+payload = json.dumps({
+  "phone_number": "+989123456789"
+})
+headers = {
+  'CH-Languages': 'en-US',
+  'CH-Locale': 'en_US',
+  'Accept': 'application/json',
+Example Response
+BodyHeader
+(0)
+{
+  "success": true,
+  "error_message": null
+}
+POSTComplete
+https://www.clubhouseapi.com/api/complete_phone_number_auth
+Complete phone number authentication. This should return auth_token, access_token, refresh_token, is_waitlisted, ...
+
+Please note that output may be different depending on the status of the authenticated user
+
+HEADERS
+CH-Languages
+en-US
+CH-Locale
+en_US
+Accept
+application/json
+Accept-Encoding
+gzip, deflate
+CH-AppBuild
+304
+CH-AppVersion
+0.1.28
+User-Agent
+clubhouse/304 (iPhone; iOS 14.4; Scale/2.00)
+Connection
+close
+Content-Type
+application/json; charset=utf-8
+BODYraw
+{
+    "phone_number": "",
+    "verification_code": "1781"
+}
+
+
+Example Request
+Successful
+View More
+import http.client
+import json
+
+conn = http.client.HTTPSConnection("www.clubhouseapi.com")
+payload = json.dumps({
+  "phone_number": "+989123456789"
+})
+headers = {
+  'CH-Languages': 'en-US',
+  'CH-Locale': 'en_US',
+  'Accept': 'application/json',
+Example Response
+BodyHeader
+(0)
+View More
+{
+  "success": true,
+  "is_verified": true,
+  "user_profile": {
+    "user_id": 1487526937,
+    "name": "name",
+    "photo_url": "https://clubhouseprod.s3.amazonaws.com:443/1487526937_fdb9988a-107c-4869-893d-3c829f3a69b7_thumbnail_250x250",
+    "username": "username"
+  },
+  "auth_token": "78da032dd191f3781e4a7ff0f8c7136156a8af0c",
+  "refresh_token": "eyJ0gXAiOiJKV1QiLCJhjGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MzMxNTM1MjU0MDIsImp0aSI6ImFhYjFlMGM5NzI0ZjQwZjZiNTQyMTVhM2QyYjJmYjA2IiwidXNlcl9pZCI6MjQ3MzkyMjh9.RHg04pVSQ2icLBkMf3LJIRRFnEG25GoLbceFtUsfqp0",
+Other
+Other useful API endpoints for Clubhouse
+
+POSTRelease Notes
+https://www.clubhouseapi.com/api/get_release_notes
+Get release notes
+
+HEADERS
+CH-Languages
+en-US
+CH-Locale
+en_US
+Accept
+application/json
+Accept-Encoding
+gzip, deflate
+CH-AppBuild
+304
+CH-AppVersion
+0.1.28
+CH-UserID
+User-Agent
+clubhouse/304 (iPhone; iOS 14.4; Scale/2.00)
+Connection
+close
+Content-Type
+application/json; charset=utf-8
+Authorization
+Token
+
+
+Example Request
+Successful
+View More
+import http.client
+
+conn = http.client.HTTPSConnection("www.clubhouseapi.com")
+payload = ''
+headers = {
+  'CH-Languages': 'en-US',
+  'CH-Locale': 'en_US',
+  'Accept': 'application/json',
+  'Accept-Encoding': 'gzip, deflate',
+  'CH-AppBuild': '304',
+  'CH-AppVersion': '0.1.28',
+Example Response
+200 OK
+BodyHeader
+(15)
+View More
+Date: Sun, 04 Apr 2021 09:20:06 GMT
+Content-Type: application/json
+Transfer-Encoding: chunked
+Connection: close
+Allow: OPTIONS, POST
+X-Frame-Options: DENY
+X-Content-Type-Options: nosniff
+Referrer-Policy: same-origin
+Vary: Origin
+CF-Cache-Status: DYNAMIC
+cf-request-id: 093dc7bf6000002c563c382000000001
+POSTCheck For Update
+https://www.clubhouseapi.com/api/check_for_update?is_testflight=0
+Check for app updates
+
+HEADERS
+CH-Languages
+en-US
+CH-Locale
+en_US
+Accept
+application/json
+Accept-Encoding
+gzip, deflate
+CH-AppBuild
+304
+CH-AppVersion
+0.1.28
+CH-UserID
+User-Agent
+clubhouse/304 (iPhone; iOS 14.4; Scale/2.00)
+Connection
+close
+Content-Type
+application/json; charset=utf-8
+Authorization
+Token
+PARAMS
+is_testflight
+0
+
+
+Example Request
+Successful
+View More
+import http.client
+
+conn = http.client.HTTPSConnection("www.clubhouseapi.com")
+payload = ''
+headers = {
+  'CH-Languages': 'en-US',
+  'CH-Locale': 'en_US',
+  'Accept': 'application/json',
+  'Accept-Encoding': 'gzip, deflate',
+  'CH-AppBuild': '304',
+  'CH-AppVersion': '0.1.28',
+Example Response
+200 OK
+BodyHeader
+(14)
+{
+  "has_update": false,
+  "success": true
+}
+POSTWaitlist Status
+https://www.clubhouseapi.com/api/check_waitlist_status
+Check whether you're still on a waitlist or not
+
+HEADERS
+CH-Languages
+en-US
+CH-Locale
+en_US
+Accept
+application/json
+Accept-Encoding
+gzip, deflate
+CH-AppBuild
+304
+CH-AppVersion
+0.1.28
+CH-UserID
+User-Agent
+clubhouse/304 (iPhone; iOS 14.4; Scale/2.00)
+Connection
+close
+Content-Type
+application/json; charset=utf-8
+Authorization
+Token
+
+
+Example Request
+Successful
+View More
+import http.client
+
+conn = http.client.HTTPSConnection("www.clubhouseapi.com")
+payload = ''
+headers = {
+  'CH-Languages': 'en-US',
+  'CH-Locale': 'en_US',
+  'Accept': 'application/json',
+  'Accept-Encoding': 'gzip, deflate',
+  'CH-AppBuild': '304',
+  'CH-AppVersion': '0.1.28',
+Example Response
+200 OK
+BodyHeader
+(15)
+View More
+{
+  "is_waitlisted": false,
+  "is_onboarding": true,
+  "analytics_properties": {
+    "SignUpWeek": "2021-10",
+    "SignUpDay": "3/11/2021"
+  },
+  "enable_twitter": true,
+  "num_preselect_follows": 50,
+  "invited_by_user_profile": {
+    "user_id": 109664648,
+User
+User related API endpoints like :
+
+Get information & settings
+Get followers / followings
+Follow / Unfollow other users
+POSTAdd Email
+https://www.clubhouseapi.com/api/add_email
+Request for email verification. You only need to do this once.
+
+HEADERS
+CH-Languages
+en-US
+CH-Locale
+en_US
+Accept
+application/json
+Accept-Encoding
+gzip, deflate
+CH-AppBuild
+304
+CH-AppVersion
+0.1.28
+CH-UserID
+User-Agent
+clubhouse/304 (iPhone; iOS 14.4; Scale/2.00)
+Connection
+close
+Content-Type
+application/json; charset=utf-8
+Authorization
+Token
+BODYraw
+{
+    "email": ""
+}
+
+
+Already verified
+Example Request
+View More
+import http.client
+import json
+
+conn = http.client.HTTPSConnection("www.clubhouseapi.com")
+payload = json.dumps({
+  "email": "hatamiarash7@gmail.com"
+})
+headers = {
+  'CH-Languages': 'en-US',
+  'CH-Locale': 'en_US',
+  'Accept': 'application/json',
+Example Response
+400 Bad Request
+BodyHeader
+(14)
+{
+  "success": false,
+  "error_message": "The email has already been verified."
+}
+POSTSettings
+https://www.clubhouseapi.com/api/get_settings
+Receive user's settings.
+
+HEADERS
+CH-Languages
+en-US
+CH-Locale
+en_US
+Accept
+application/json
+Accept-Encoding
+gzip, deflate
+CH-AppBuild
+304
+CH-AppVersion
+0.1.28
+CH-UserID
+User-Agent
+clubhouse/304 (iPhone; iOS 14.4; Scale/2.00)
+Connection
+close
+Content-Type
+application/json; charset=utf-8
+Authorization
+Token
+
+
+Example Request
+Successful
+View More
+import http.client
+
+conn = http.client.HTTPSConnection("www.clubhouseapi.com")
+payload = ''
+headers = {
+  'CH-Languages': 'en-US',
+  'CH-Locale': 'en_US',
+  'Accept': 'application/json',
+  'Accept-Encoding': 'gzip, deflate',
+  'CH-AppBuild': '304',
+  'CH-AppVersion': '0.1.28',
+Example Response
+200 OK
+BodyHeader
+(15)
+{
+  "notifications_enable_trending": true,
+  "notifications_frequency": 3,
+  "notifications_is_paused": false,
+  "success": true
+}
+POSTMe
+https://www.clubhouseapi.com/api/me
+Get my information.
+
+HEADERS
+CH-Languages
+en-US
+CH-Locale
+en_US
+Accept
+application/json
+Accept-Encoding
+gzip, deflate
+CH-AppBuild
+304
+CH-AppVersion
+0.1.28
+CH-UserID
+User-Agent
+clubhouse/304 (iPhone; iOS 14.4; Scale/2.00)
+Connection
+close
+Content-Type
+application/json; charset=utf-8
+Authorization
+Token
+BODYraw
+{
+    "return_blocked_ids": true,
+    "timezone_identifier": "Asia/Tehran",
+    "return_following_ids": true
+}
+
+
+Example Request
+Successful
+View More
+import http.client
+
+conn = http.client.HTTPSConnection("www.clubhouseapi.com")
+payload = "{\r\n    \"return_blocked_ids\": true,\r\n    \"timezone_identifier\": \"Asia/Tehran\",\r\n    \"return_following_ids\": true\r\n}"
+headers = {
+  'CH-Languages': 'en-US',
+  'CH-Locale': 'en_US',
+  'Accept': 'application/json',
+  'Accept-Encoding': 'gzip, deflate',
+  'CH-AppBuild': '304',
+  'CH-AppVersion': '0.1.28',
+Example Response
+200 OK
+BodyHeader
+(15)
+View More
+{
+  "has_unread_notifications": false,
+  "actionable_notifications_count": 0,
+  "num_invites": 5,
+  "refresh_token": "eyJ0eXAiOiJKV1QiLCJhbGdiOiJIUzI1NiJ8.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4hCI6MzMxNTM1Mjg3ODIsImp0aSI6Ijc4YjRiMzMzMDVkODQ4ZWI4Mzg2NGExMDhiMzQyOTFkIiwidXNlcl9pZCI6MjQ3MzkyMjh9.36qEUoiSsQHnMuRoJdpcVFYcrn6H2jlfjkpIjI80pxQ",
+  "access_token": "eyJ0eXAiOiJKV1QiLCJhbGcyOi8IUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwrjoxNjE3NTI5MDgyLCJqdGkiOiJjNjk4YjFiNTY2MDc0MjcxYjcwNGY2OTg4YjcwOWI2MCIsInVzZXJfaWQiOjI0NzM5MjI4fQ.HgY4mfCS4YaFEckkFGmRzywe7DbMoTIdrOuQu_Rw8L0",
+  "notifications_enabled": true,
+  "user_profile": {
+    "user_id": 1357526937,
+    "name": "name",
+    "photo_url": "https://clubhouseprod.s3.amazonaws.com:443/1357526937_fdb9988a-107c-4869-893d-3c829f3a69b7_thumbnail_250x250",
+POSTFollow User
+https://www.clubhouseapi.com/api/follow
+Follow a user.
+Different value for source may require different parameters to be set. The default value is 4
+
+HEADERS
+CH-Languages
+en-US
+CH-Locale
+en_US
+Accept
+application/json
+Accept-Encoding
+gzip, deflate
+CH-AppBuild
+304
+CH-AppVersion
+0.1.28
+CH-UserID
+User-Agent
+clubhouse/304 (iPhone; iOS 14.4; Scale/2.00)
+Connection
+close
+Content-Type
+application/json; charset=utf-8
+Authorization
+Token
+BODYraw
+{
+    "source_topic_id": null,
+    "user_ids": null,
+    "user_id": 347582,
+    "source": 4
+}
+
+
+Example Request
+Successful
+View More
+import http.client
+
+conn = http.client.HTTPSConnection("www.clubhouseapi.com")
+payload = "{\r\n    \"source_topic_id\": null,\r\n    \"user_ids\": null,\r\n    \"user_id\": 347582,\r\n    \"source\": 4\r\n}"
+headers = {
+  'CH-Languages': 'en-US',
+  'CH-Locale': 'en_US',
+  'Accept': 'application/json',
+  'Accept-Encoding': 'gzip, deflate',
+  'CH-AppBuild': '304',
+  'CH-AppVersion': '0.1.28',
+Example Response
+200 OK
+BodyHeader
+(14)
+{
+  "success": true
+}
+POSTUnfollow User
+https://www.clubhouseapi.com/api/unfollow
+Unfollow a user.
+
+HEADERS
+CH-Languages
+en-US
+CH-Locale
+en_US
+Accept
+application/json
+Accept-Encoding
+gzip, deflate
+CH-AppBuild
+304
+CH-AppVersion
+0.1.28
+CH-UserID
+User-Agent
+clubhouse/304 (iPhone; iOS 14.4; Scale/2.00)
+Connection
+close
+Content-Type
+application/json; charset=utf-8
+Authorization
+Token
+BODYraw
+{
+    "user_id": 347582
+}
+
+
+Example Request
+Successful
+View More
+import http.client
+
+conn = http.client.HTTPSConnection("www.clubhouseapi.com")
+payload = "{\r\n    \"user_id\": 347582\r\n}"
+headers = {
+  'CH-Languages': 'en-US',
+  'CH-Locale': 'en_US',
+  'Accept': 'application/json',
+  'Accept-Encoding': 'gzip, deflate',
+  'CH-AppBuild': '304',
+  'CH-AppVersion': '0.1.28',
+Example Response
+200 OK
+BodyHeader
+(14)
+{
+  "success": true
+}
+POSTBlock
+https://www.clubhouseapi.com/api/block
+Block a user.
+
+HEADERS
+CH-Languages
+en-US
+CH-Locale
+en_US
+Accept
+application/json
+Accept-Encoding
+gzip, deflate
+CH-AppBuild
+304
+CH-AppVersion
+0.1.28
+CH-UserID
+User-Agent
+clubhouse/304 (iPhone; iOS 14.4; Scale/2.00)
+Connection
+close
+Content-Type
+application/json; charset=utf-8
+Authorization
+Token
+BODYraw
+{
+    "user_id": 347582
+}
+
+
+Example Request
+Successful
+View More
+import http.client
+
+conn = http.client.HTTPSConnection("www.clubhouseapi.com")
+payload = "{\r\n    \"user_id\": 347582\r\n}"
+headers = {
+  'CH-Languages': 'en-US',
+  'CH-Locale': 'en_US',
+  'Accept': 'application/json',
+  'Accept-Encoding': 'gzip, deflate',
+  'CH-AppBuild': '304',
+  'CH-AppVersion': '0.1.28',
+Example Response
+200 OK
+BodyHeader
+(14)
+{
+  "success": true
+}
+POSTUnblock
+https://www.clubhouseapi.com/api/unblock
+Unblock a user.
+
+HEADERS
+CH-Languages
+en-US
+CH-Locale
+en_US
+Accept
+application/json
+Accept-Encoding
+gzip, deflate
+CH-AppBuild
+304
+CH-AppVersion
+0.1.28
+CH-UserID
+User-Agent
+clubhouse/304 (iPhone; iOS 14.4; Scale/2.00)
+Connection
+close
+Content-Type
+application/json; charset=utf-8
+Authorization
+Token
+BODYraw
+{
+    "user_id": 347582
+}
+
+
+Example Request
+Successful
+View More
+import http.client
+
+conn = http.client.HTTPSConnection("www.clubhouseapi.com")
+payload = "{\r\n    \"user_id\": 347582\r\n}"
+headers = {
+  'CH-Languages': 'en-US',
+  'CH-Locale': 'en_US',
+  'Accept': 'application/json',
+  'Accept-Encoding': 'gzip, deflate',
+  'CH-AppBuild': '304',
+  'CH-AppVersion': '0.1.28',
+Example Response
+200 OK
+BodyHeader
+(14)
+{
+  "success": true
+}
+GETFollowings
+https://www.clubhouseapi.com/api/get_following?user_id=1387526936&page_size=100&page=1
+Get following of the given user_id
+
+HEADERS
+CH-Languages
+en-US
+CH-Locale
+en_US
+Accept
+application/json
+Accept-Encoding
+gzip, deflate
+CH-AppBuild
+304
+CH-AppVersion
+0.1.28
+CH-UserID
+User-Agent
+clubhouse/304 (iPhone; iOS 14.4; Scale/2.00)
+Connection
+close
+Content-Type
+application/json; charset=utf-8
+Authorization
+Token
+PARAMS
+user_id
+1387526936
+page_size
+100
+page
+1
+
+
+Example Request
+Successful
+View More
+import http.client
+
+conn = http.client.HTTPSConnection("www.clubhouseapi.com")
+payload = ''
+headers = {
+  'CH-Languages': 'en-US',
+  'CH-Locale': 'en_US',
+  'Accept': 'application/json',
+  'Accept-Encoding': 'gzip, deflate',
+  'CH-AppBuild': '304',
+  'CH-AppVersion': '0.1.28',
+Example Response
+200 OK
+BodyHeader
+(15)
+View More
+{
+  "users": [
+    {
+      "user_id": 699471103,
+      "name": "Arman Babagol",
+      "photo_url": "https://clubhouseprod.s3.amazonaws.com:443/699471103_dd53549c-056f-4eea-b3ef-922d43abfb60_thumbnail_250x250",
+      "username": "armandivar",
+      "bio": "Crypto lawyer\nFin tech fan and lawyer \nBitcoin lover \nAttorney at law ⚖️\nMember …",
+      "twitter": "armandivar"
+    },
+    {
+GETFollowers
+https://www.clubhouseapi.com/api/get_followers?user_id=1387526936&page_size=100&page=1
+Get followers of the given user_id
+
+HEADERS
+CH-Languages
+en-US
+CH-Locale
+en_US
+Accept
+application/json
+Accept-Encoding
+gzip, deflate
+CH-AppBuild
+304
+CH-AppVersion
+0.1.28
+CH-UserID
+User-Agent
+clubhouse/304 (iPhone; iOS 14.4; Scale/2.00)
+Connection
+close
+Content-Type
+application/json; charset=utf-8
+Authorization
+Token
+PARAMS
+user_id
+1387526936
+page_size
+100
+page
+1
+
+
+Example Request
+Successful
+View More
+import http.client
+
+conn = http.client.HTTPSConnection("www.clubhouseapi.com")
+payload = ''
+headers = {
+  'CH-Languages': 'en-US',
+  'CH-Locale': 'en_US',
+  'Accept': 'application/json',
+  'Accept-Encoding': 'gzip, deflate',
+  'CH-AppBuild': '304',
+  'CH-AppVersion': '0.1.28',
+Example Response
+200 OK
+BodyHeader
+(15)
+View More
+{
+  "users": [
+    {
+      "user_id": 1922512883,
+      "name": "Sadegh Khademi",
+      "photo_url": "https://clubhouseprod.s3.amazonaws.com:443/1922512883_efd8b254-f3a0-433b-98d8-905bd99af3c9_thumbnail_250x250",
+      "username": "niiiixd",
+      "last_active_minutes": 300,
+      "bio": "#devops #linux *nix sysadmin #cisco system engineer",
+      "twitter": null
+    },
+POSTOnline Friends
+https://www.clubhouseapi.com/api/get_online_friends
+List all online friends.
+
+HEADERS
+CH-Languages
+en-US
+CH-Locale
+en_US
+Accept
+application/json
+Accept-Encoding
+gzip, deflate
+CH-AppBuild
+304
+CH-AppVersion
+0.1.28
+CH-UserID
+User-Agent
+clubhouse/304 (iPhone; iOS 14.4; Scale/2.00)
+Connection
+close
+Content-Type
+application/json; charset=utf-8
+Authorization
+Token
+
+
+Example Request
+Successful
+View More
+import http.client
+
+conn = http.client.HTTPSConnection("www.clubhouseapi.com")
+payload = ''
+headers = {
+  'CH-Languages': 'en-US',
+  'CH-Locale': 'en_US',
+  'Accept': 'application/json',
+  'Accept-Encoding': 'gzip, deflate',
+  'CH-AppBuild': '304',
+  'CH-AppVersion': '0.1.28',
+Example Response
+200 OK
+BodyHeader
+(15)
+View More
+{
+  "clubs": [],
+  "users": [
+    {
+      "user_id": 1322269570,
+      "name": "parisa mhr",
+      "photo_url": "https://clubhouseprod.s3.amazonaws.com:443/1322269570_1ee1cce5-46cd-41d2-b0f7-83b865fa4583_thumbnail_250x250",
+      "username": "parisamhrs",
+      "last_active_minutes": 0,
+      "channel": "MOvA5VE7",
+      "is_speaker": false,
+POSTProfile
+https://www.clubhouseapi.com/api/get_profile
+Lookup someone else's profile.
+
+HEADERS
+CH-Languages
+en-US
+CH-Locale
+en_US
+Accept
+application/json
+Accept-Encoding
+gzip, deflate
+CH-AppBuild
+304
+CH-AppVersion
+0.1.28
+CH-UserID
+User-Agent
+clubhouse/304 (iPhone; iOS 14.4; Scale/2.00)
+Connection
+close
+Content-Type
+application/json; charset=utf-8
+Authorization
+Token
+BODYraw
+{
+    "user_id": 347582
+}
+
+
+Example Request
+Successful
+View More
+import http.client
+
+conn = http.client.HTTPSConnection("www.clubhouseapi.com")
+payload = "{\r\n    \"user_id\": 347582\r\n}"
+headers = {
+  'CH-Languages': 'en-US',
+  'CH-Locale': 'en_US',
+  'Accept': 'application/json',
+  'Accept-Encoding': 'gzip, deflate',
+  'CH-AppBuild': '304',
+  'CH-AppVersion': '0.1.28',
+Example Response
+200 OK
+BodyHeader
+(15)
+View More
+{
+  "user_profile": {
+    "user_id": 347582,
+    "name": "William Tong",
+    "displayname": null,
+    "photo_url": "https://clubhouseprod.s3.amazonaws.com:443/347582_d73d2190-ffde-4d10-8cb0-b78293a2fa14",
+    "username": "williamt",
+    "bio": "Connector~Collaborator 🤝 \nLet's explore and expand the NFT space!\n🗽Save New York with Andrew Yang. YangGang.club Connect with me on Instagram as I'm able to direct message there. IG linked at the bottom👇\n\n🌊 A rising tide lifts all boats 🌊\nEkim@goodwatercap.com\nEmail your donation receipt if you donated to raise awareness of AAPI issues. \n$1/$1 up to a million dollars match to a fund fighting racism and violence in the AAPI community. \n\n\"Great givers can be great hitters\" - @Grady in ClubHouse\n\nSupport artists, creatives, and those who need support💪 \n\nFeel free to ask me any questions you may have about clubhouse. I'm trying to filter inactive people and clubs. If I accidentally disconnect from you because of my clumsy fingers, please DM me to let me know. \n\n🏡Real Estate Networking Club📍 Serving Los Angeles, CA - Arcadia. Also Pasadena, San Marino, Downtown and North East LA 🏠 \n\nHumanity~Community 👨‍🚀\n\"Proba Te Dignum\" \n\n💎 Are you interested in VC/Startups/Entrepreneursship? \n👇Follow (AV) = Asian VC Club 👇\nInspired by Black VC Club. Follow both. Change the world 💪  🚀Stay tuned🚀\n\nI spend my time creating connections, exploring Los Angeles, and grinding as a real estate broker of houses and warehouses, newbie multifamily investor, developer in diapers, rehab renovator flipper, and off-market wholesale property procurement educator. Happy to teach you what I know. Small business owner. Let's be successful together. \n\n🍾NFTs give artists the freedom to control their art and journey. For the first time in history, artists will have the chance to capture their own equity. \n\nCreated a PPE (masks, gloves, gel sanitizer, etc.) importer network April 2020 with my friend to protect people and stopgap the loss of life via distribution and donation of medical supplies. Over 10 million surgical 3-ply, half a million NIOSH N95 respirator masks, and my heartfelt gratitude distributed to date. Feel free to DM if you have groups who need PPE. \n\nDO iT FOR HER.\n🦁Gryffindor🦁 \nMental Health Awareness\nMamba Mentality\nFacebook.com/williamjtong\nSomeone teach me how to use LinkedIn 😂 \n\nFind my LinkedIn link in my Twitter & IG bio\n\n👇 DMs Open👇",
+    "twitter": "WilliamTong",
+    "instagram": "glifi",
+    "num_followers": 51052,
+POSTClubs
+https://www.clubhouseapi.com/api/get_clubs
+Get list of clubs the user's in.
+
+HEADERS
+CH-Languages
+en-US
+CH-Locale
+en_US
+Accept
+application/json
+Accept-Encoding
+gzip, deflate
+CH-AppBuild
+304
+CH-AppVersion
+0.1.28
+CH-UserID
+User-Agent
+clubhouse/304 (iPhone; iOS 14.4; Scale/2.00)
+Connection
+close
+Content-Type
+application/json; charset=utf-8
+Authorization
+Token
+BODYraw
+{
+    "is_startable_only": false
+}
+
+
+Example Request
+Successful
+View More
+import http.client
+
+conn = http.client.HTTPSConnection("www.clubhouseapi.com")
+payload = "{\r\n    \"is_startable_only\": false\r\n}"
+headers = {
+  'CH-Languages': 'en-US',
+  'CH-Locale': 'en_US',
+  'Accept': 'application/json',
+  'Accept-Encoding': 'gzip, deflate',
+  'CH-AppBuild': '304',
+  'CH-AppVersion': '0.1.28',
+Example Response
+200 OK
+BodyHeader
+(15)
+View More
+{
+  "clubs": [
+    {
+      "club_id": 1428805066,
+      "name": "5G in Vertical Industries",
+      "description": "✨Welcome to the 5G in Vertical Industries Club✨\n\n👨‍💻 Our Mission:\n~•~•~•~•~•~•~•~•~•~•~•~•~\nTo connect people, interested in 5G Networking Technology as the key enabler of Diverse Vertical Industries. Engineers, Researchers, Business Developers, Investors, Founders, Clients, Operators are welcome to join our events and conversations. Please feel to nominate.\n\n~•~•~•~•~•~•~•~•~•~•~•~•~\nدور هم جمع میشیم تا در مورد شبکه های مخابرات نسل پنجم با هم تبادل اطلاعات کنیم و‌‌ با فعالان این حوضه و صنعت های بین رشته ای در فضای دوستانه آشنا بشیم.\n\n👈👈توجه 👉👉\n~•~•~•~•~•~•~•~•~•~•~•~•~\n۱- گفتگو ها در این کلاب بدور از هر گونه مباحث مرتبط با گروه ها، احزاب سیاسی، ادیان و غیره می‌باشد.\n۲- در این کلاب ضبط صدا مجاز نیست.\n۳-در این کلاب بی احترامی، شوخی و توهین نسبت به افراد به خاطر نژاد، قومیت، جنسیت، باورهای مذهبی و غیره مجاز نیست.\n۴- مدیریت کلاب و مودریتورهای روم ها هیچ مسئولیتی در قبال تایید و شناسایی هویت واقعی افرادی که در گفتگوها شرکت میکنند را ندارد.\n\n📜 Topics and Domains:\n~•~•~•~•~•~•~•~•~•~•~•~•~\n▫️ End-to-End Network Architecture.\n▫️ Edge Computing Applications.\n▫️ Solutions for Businesses.\n▫️ Business Opportunities.\n▫️ Startups and PoCs.\n▫️ Industry Connect.\n▫️ Stakeholders.\n▫️ New Radio.\n▫️ Use-Cases.\n▫️ Market Sharing.\n▫️ Deployment Options.\n▫️ Enabler Technologies.\n▫️ Consulting and Training.\n▫️ Technology Transformation.\n▫️ Network Slicing Opportunities.\n\n📥  Contact Information:\n~•~•~•~•~•~•~•~•~•~•~•~•~\nClubhouse: @5gin5minutes\nInstagram: @5gin5minutes\n\n🗣 Upcoming Events:\n~•~•~•~•~•~•~•~•~•~•~•~•~\nRoom & Topic to be announced.\n🗓 Fridays at 19:00 (CET)\n‎ (جمعه ها ساعت ۹/۳۰ شب به وقت ایران)",
+      "photo_url": "https://clubhouseprod.s3.amazonaws.com:443/club_1428805066_cd442ced-588a-4bbc-93b4-9570216aafa2_thumbnail_250x250",
+      "num_members": 1017,
+      "num_followers": 283,
+      "enable_private": true,
+      "is_follow_allowed": true,
+POSTSearch
+https://www.clubhouseapi.com/api/search_users
+Search users based on the given query.
+
+HEADERS
+CH-Languages
+en-US
+CH-Locale
+en_US
+Accept
+application/json
+Accept-Encoding
+gzip, deflate
+CH-AppBuild
+304
+CH-AppVersion
+0.1.28
+CH-UserID
+User-Agent
+clubhouse/304 (iPhone; iOS 14.4; Scale/2.00)
+Connection
+close
+Content-Type
+application/json; charset=utf-8
+Authorization
+Token
+BODYraw
+{
+    "cofollows_only": false,
+    "following_only": false,
+    "followers_only": false,
+    "query": "arash"
+}
+
+
+Example Request
+Successful
+View More
+import http.client
+
+conn = http.client.HTTPSConnection("www.clubhouseapi.com")
+payload = "{\r\n    \"cofollows_only\": false,\r\n    \"following_only\": false,\r\n    \"followers_only\": false,\r\n    \"query\": \"arash\"\r\n}"
+headers = {
+  'CH-Languages': 'en-US',
+  'CH-Locale': 'en_US',
+  'Accept': 'application/json',
+  'Accept-Encoding': 'gzip, deflate',
+  'CH-AppBuild': '304',
+  'CH-AppVersion': '0.1.28',
+Example Response
+200 OK
+BodyHeader
+(15)
+View More
+{
+  "users": [
+    {
+      "user_id": "627495380",
+      "name": "Arash",
+      "username": "4rash",
+      "photo_url": "https://clubhouseprod.s3.amazonaws.com:443/627495380_0bdbdf0a-a6bd-49be-a43f-9440df74fc3a_thumbnail_250x250",
+      "bio": "1987"
+    },
+    {
+      "user_id": "5847971",
+POSTLogout
+https://www.clubhouseapi.com/api/logout
+Logout from current session.
+
+HEADERS
+CH-Languages
+en-US
+CH-Locale
+en_US
+Accept
+application/json
+Accept-Encoding
+gzip, deflate
+CH-AppBuild
+304
+CH-AppVersion
+0.1.28
+CH-UserID
+User-Agent
+clubhouse/304 (iPhone; iOS 14.4; Scale/2.00)
+Connection
+close
+Content-Type
+application/json; charset=utf-8
+Authorization
+Token
+
+
+Example Request
+Successful
+View More
+import http.client
+
+conn = http.client.HTTPSConnection("www.clubhouseapi.com")
+payload = "{\r\n    \"cofollows_only\": false,\r\n    \"following_only\": false,\r\n    \"followers_only\": false,\r\n    \"query\": \"arash\"\r\n}"
+headers = {
+  'CH-Languages': 'en-US',
+  'CH-Locale': 'en_US',
+  'Accept': 'application/json',
+  'Accept-Encoding': 'gzip, deflate',
+  'CH-AppBuild': '304',
+  'CH-AppVersion': '0.1.28',
+Example Response
+200 OK
+BodyHeader
+(15)
+View More
+{
+  "users": [
+    {
+      "user_id": "627495380",
+      "name": "Arash",
+      "username": "4rash",
+      "photo_url": "https://clubhouseprod.s3.amazonaws.com:443/627495380_0bdbdf0a-a6bd-49be-a43f-9440df74fc3a_thumbnail_250x250",
+      "bio": "1987"
+    },
+    {
+      "user_id": "5847971",
+Channel ( Room )
+Channel related API endpoints.
+
+GETGet Channels
+https://www.clubhouseapi.com/api/get_channels
+Get list of channels, based on the server's channel selection algorithm.
+
+HEADERS
+CH-Languages
+en-US
+CH-Locale
+en_US
+Accept
+application/json
+Accept-Encoding
+gzip, deflate
+CH-AppBuild
+304
+CH-AppVersion
+0.1.28
+CH-UserID
+User-Agent
+clubhouse/304 (iPhone; iOS 14.4; Scale/2.00)
+Connection
+close
+Content-Type
+application/json; charset=utf-8
+Authorization
+Token
+
+
+Example Request
+Successful
+View More
+import http.client
+
+conn = http.client.HTTPSConnection("www.clubhouseapi.com")
+payload = ''
+headers = {
+  'CH-Languages': 'en-US',
+  'CH-Locale': 'en_US',
+  'Accept': 'application/json',
+  'Accept-Encoding': 'gzip, deflate',
+  'CH-AppBuild': '304',
+  'CH-AppVersion': '0.1.28',
+Example Response
+200 OK
+BodyHeader
+(15)
+View More
+{
+  "channels": [
+    {
+      "creator_user_profile_id": 1660820615,
+      "channel_id": 614686213,
+      "channel": "PrbprrWW",
+      "topic": "Binance and coinmarketcap soon Social media Trading platform",
+      "is_private": false,
+      "is_social_mode": false,
+      "url": "https://www.joinclubhouse.com/room/PrbprrWW",
+      "feature_flags": [
+POSTGet Channel
+https://www.clubhouseapi.com/api/get_channel
+Get information of the given channel.
+
+HEADERS
+CH-Languages
+en-US
+CH-Locale
+en_US
+Accept
+application/json
+Accept-Encoding
+gzip, deflate
+CH-AppBuild
+304
+CH-AppVersion
+0.1.28
+CH-UserID
+User-Agent
+clubhouse/304 (iPhone; iOS 14.4; Scale/2.00)
+Connection
+close
+Content-Type
+application/json; charset=utf-8
+Authorization
+Token
+BODYraw
+{
+    "channel": "PrbprrWW",
+    "channel_id": 614686213
+}
+
+
+Example Request
+Successful
+View More
+import http.client
+
+conn = http.client.HTTPSConnection("www.clubhouseapi.com")
+payload = "{\r\n    \"channel\": \"PrbprrWW\",\r\n    \"channel_id\": 614686213\r\n}"
+headers = {
+  'CH-Languages': 'en-US',
+  'CH-Locale': 'en_US',
+  'Accept': 'application/json',
+  'Accept-Encoding': 'gzip, deflate',
+  'CH-AppBuild': '304',
+  'CH-AppVersion': '0.1.28',
+Example Response
+200 OK
+BodyHeader
+(15)
+View More
+{
+  "creator_user_profile_id": 1660820615,
+  "channel_id": 614686213,
+  "channel": "PrbprrWW",
+  "topic": "Binance and coinmarketcap soon Social media Trading platform",
+  "is_private": false,
+  "is_social_mode": false,
+  "url": "https://www.joinclubhouse.com/room/PrbprrWW",
+  "feature_flags": [
+    "AGORA_AUDIO_PROFILE_SPEECH_STANDARD"
+  ],
+POSTCreate Channel
+https://www.clubhouseapi.com/api/create_channel
+Create a new channel.
+
+HEADERS
+CH-Languages
+en-US
+CH-Locale
+en_US
+Accept
+application/json
+Accept-Encoding
+gzip, deflate
+CH-AppBuild
+304
+CH-AppVersion
+0.1.28
+CH-UserID
+User-Agent
+clubhouse/304 (iPhone; iOS 14.4; Scale/2.00)
+Connection
+close
+Content-Type
+application/json; charset=utf-8
+Authorization
+Token
+BODYraw
+{
+    "is_social_mode": false,
+    "is_private": false,
+    "club_id": null,
+    "user_ids": [],
+    "event_id": null,
+    "topic": ""
+}
+
+
+Example Request
+Successful
+View More
+import http.client
+
+conn = http.client.HTTPSConnection("www.clubhouseapi.com")
+payload = "{\r\n    \"is_social_mode\": false,\r\n    \"is_private\": false,\r\n    \"club_id\": null,\r\n    \"user_ids\": [],\r\n    \"event_id\": null,\r\n    \"topic\": \"\"\r\n}"
+headers = {
+  'CH-Languages': 'en-US',
+  'CH-Locale': 'en_US',
+  'Accept': 'application/json',
+  'Accept-Encoding': 'gzip, deflate',
+  'CH-AppBuild': '304',
+  'CH-AppVersion': '0.1.28',
+Example Response
+200 OK
+BodyHeader
+(15)
+View More
+{
+  "creator_user_profile_id": 1387526936,
+  "channel_id": 1081680570,
+  "channel": "xjXqoW1A",
+  "topic": null,
+  "is_private": false,
+  "is_social_mode": false,
+  "url": "https://www.joinclubhouse.com/room/xjXqoW1A",
+  "feature_flags": [
+    "AGORA_AUDIO_PROFILE_SPEECH_STANDARD"
+  ],
+POSTEnd Channel
+https://www.clubhouseapi.com/api/end_channel
+Kick everyone and close the channel. Requires moderator privilege.
+
+HEADERS
+CH-Languages
+en-US
+CH-Locale
+en_US
+Accept
+application/json
+Accept-Encoding
+gzip, deflate
+CH-AppBuild
+304
+CH-AppVersion
+0.1.28
+CH-UserID
+User-Agent
+clubhouse/304 (iPhone; iOS 14.4; Scale/2.00)
+Connection
+close
+Content-Type
+application/json; charset=utf-8
+Authorization
+Token
+BODYraw
+{
+    "channel": "PvEd3DkJ",
+    "channel_id": 596368025
+}
+
+
+Example Request
+Successful
+View More
+import http.client
+
+conn = http.client.HTTPSConnection("www.clubhouseapi.com")
+payload = "{\r\n    \"channel\": \"PvEd3DkJ\",\r\n    \"channel_id\": 596368025\r\n}"
+headers = {
+  'CH-Languages': 'en-US',
+  'CH-Locale': 'en_US',
+  'Accept': 'application/json',
+  'Accept-Encoding': 'gzip, deflate',
+  'CH-AppBuild': '304',
+  'CH-AppVersion': '0.1.28',
+Example Response
+200 OK
+BodyHeader
+(14)
+{
+  "success": true
+}
+POSTInvite User
+https://www.clubhouseapi.com/api/invite_to_existing_channel
+Invite someone to a currently joined channel. It will send a ping notification to the given user_id.
+
+HEADERS
+CH-Languages
+en-US
+CH-Locale
+en_US
+Accept
+application/json
+Accept-Encoding
+gzip, deflate
+CH-AppBuild
+304
+CH-AppVersion
+0.1.28
+CH-UserID
+User-Agent
+clubhouse/304 (iPhone; iOS 14.4; Scale/2.00)
+Connection
+close
+Content-Type
+application/json; charset=utf-8
+Authorization
+Token
+BODYraw
+{
+    "channel": "xjXqoW1A",
+    "user_id": 1834700975
+}
+
+
+Unfollowed users
+Example Request
+View More
+import http.client
+
+conn = http.client.HTTPSConnection("www.clubhouseapi.com")
+payload = "{\r\n    \"channel\": \"xjXqoW1A\",\r\n    \"user_id\": 1387526936\r\n}"
+headers = {
+  'CH-Languages': 'en-US',
+  'CH-Locale': 'en_US',
+  'Accept': 'application/json',
+  'Accept-Encoding': 'gzip, deflate',
+  'CH-AppBuild': '304',
+  'CH-AppVersion': '0.1.28',
+Example Response
+400 Bad Request
+BodyHeader
+(14)
+{
+  "success": false,
+  "notifications_enabled": false,
+  "fallback_number_hash": null,
+  "fallback_message": null,
+  "error_message": "You can only invite people who follow you"
+}
+POSTHide Channel
+https://www.clubhouseapi.com/api/hide_channel
+Hide/Unhide the channel from the channel list.
+
+HEADERS
+CH-Languages
+en-US
+CH-Locale
+en_US
+Accept
+application/json
+Accept-Encoding
+gzip, deflate
+CH-AppBuild
+304
+CH-AppVersion
+0.1.28
+CH-UserID
+User-Agent
+clubhouse/304 (iPhone; iOS 14.4; Scale/2.00)
+Connection
+close
+Content-Type
+application/json; charset=utf-8
+Authorization
+Token
+BODYraw
+{
+    "channel": "xjXqoW1A",
+    "hide": false
+}
+
+
+Example Request
+Successful
+View More
+import http.client
+
+conn = http.client.HTTPSConnection("www.clubhouseapi.com")
+payload = "{\r\n    \"channel\": \"xjXqoW1A\",\r\n    \"hide\": true\r\n}"
+headers = {
+  'CH-Languages': 'en-US',
+  'CH-Locale': 'en_US',
+  'Accept': 'application/json',
+  'Accept-Encoding': 'gzip, deflate',
+  'CH-AppBuild': '304',
+  'CH-AppVersion': '0.1.28',
+Example Response
+200 OK
+BodyHeader
+(14)
+{
+  "success": true
+}
+POSTLeave Channel
+https://www.clubhouseapi.com/api/leave_channel
+Leave the given channel.
+
+HEADERS
+CH-Languages
+en-US
+CH-Locale
+en_US
+Accept
+application/json
+Accept-Encoding
+gzip, deflate
+CH-AppBuild
+304
+CH-AppVersion
+0.1.28
+CH-UserID
+User-Agent
+clubhouse/304 (iPhone; iOS 14.4; Scale/2.00)
+Connection
+close
+Content-Type
+application/json; charset=utf-8
+Authorization
+Token
+BODYraw
+{
+    "channel": "xV7ZAdgz",
+    "channel_id": 1595047778
+}
+
+
+Example Request
+Successful
+View More
+import http.client
+
+conn = http.client.HTTPSConnection("www.clubhouseapi.com")
+payload = "{\r\n    \"channel\": \"PrbprrWW\",\r\n    \"channel_id\": 614686213\r\n}"
+headers = {
+  'CH-Languages': 'en-US',
+  'CH-Locale': 'en_US',
+  'Accept': 'application/json',
+  'Accept-Encoding': 'gzip, deflate',
+  'CH-AppBuild': '304',
+  'CH-AppVersion': '0.1.28',
+Example Response
+200 OK
+BodyHeader
+(14)
+{
+  "success": true
+}
+POSTJoin Channel
+https://www.clubhouseapi.com/api/join_channel
+Join the given channel.
+
+HEADERS
+CH-Languages
+en-US
+CH-Locale
+en_US
+Accept
+application/json
+Accept-Encoding
+gzip, deflate
+CH-AppBuild
+304
+CH-AppVersion
+0.1.28
+CH-UserID
+User-Agent
+clubhouse/304 (iPhone; iOS 14.4; Scale/2.00)
+Connection
+close
+Content-Type
+application/json; charset=utf-8
+Authorization
+Token
+BODYraw
+{
+    "channel": "xV7ZAdgz",
+    "attribution_source": "feed",
+    "attribution_details": "eyJpc19leHBsb3JlIjpmYWxzZSwicmFuayI6MX0="
+}
+
+
+Not available
+Example Request
+View More
+import http.client
+
+conn = http.client.HTTPSConnection("www.clubhouseapi.com")
+payload = "{\r\n    \"channel\": \"PrbprrWW\",\r\n    \"attribution_source\": \"feed\",\r\n    \"attribution_details\": \"eyJpc19leHBsb3JlIjpmYWxzZSwicmFuayI6MX0=\"\r\n}"
+headers = {
+  'CH-Languages': 'en-US',
+  'CH-Locale': 'en_US',
+  'Accept': 'application/json',
+  'Accept-Encoding': 'gzip, deflate',
+  'CH-AppBuild': '304',
+  'CH-AppVersion': '0.1.28',
+Example Response
+400 Bad Request
+BodyHeader
+(14)
+{
+  "success": false,
+  "error_message": "That room is no longer available 👋🏼\nTry starting a new one instead?"
+}
+Club
+Club related API endpoints
+
+POSTSearch
+https://www.clubhouseapi.com/api/search_clubs
+Search clubs based on the given query.
+
+HEADERS
+CH-Languages
+en-US
+CH-Locale
+en_US
+Accept
+application/json
+Accept-Encoding
+gzip, deflate
+CH-AppBuild
+304
+CH-AppVersion
+0.1.28
+CH-UserID
+User-Agent
+clubhouse/304 (iPhone; iOS 14.4; Scale/2.00)
+Connection
+close
+Content-Type
+application/json; charset=utf-8
+Authorization
+Token
+BODYraw
+{
+    "cofollows_only": false,
+    "following_only": false,
+    "followers_only": false,
+    "query": "devops"
+}
+
+
+Example Request
+Successful
+View More
+import http.client
+
+conn = http.client.HTTPSConnection("www.clubhouseapi.com")
+payload = "{\r\n    \"cofollows_only\": false,\r\n    \"following_only\": false,\r\n    \"followers_only\": false,\r\n    \"query\": \"devops\"\r\n}"
+headers = {
+  'CH-Languages': 'en-US',
+  'CH-Locale': 'en_US',
+  'Accept': 'application/json',
+  'Accept-Encoding': 'gzip, deflate',
+  'CH-AppBuild': '304',
+  'CH-AppVersion': '0.1.28',
+Example Response
+200 OK
+BodyHeader
+(15)
+View More
+{
+  "clubs": [
+    {
+      "club_id": "1092471136",
+      "name": "DevOps/SRE",
+      "description": "",
+      "photo_url": "https://clubhouseprod.s3.amazonaws.com:443/club_1092471136_1078fb23-db5c-4fdd-927b-0635d8390bdc_thumbnail_250x250",
+      "num_followers": 744,
+      "num_members": 65,
+      "is_member": false,
+      "is_follower": false
+POSTInformation
+https://www.clubhouseapi.com/api/get_club
+Get the information about the given club_id.
+
+HEADERS
+CH-Languages
+en-US
+CH-Locale
+en_US
+Accept
+application/json
+Accept-Encoding
+gzip, deflate
+CH-AppBuild
+304
+CH-AppVersion
+0.1.28
+CH-UserID
+User-Agent
+clubhouse/304 (iPhone; iOS 14.4; Scale/2.00)
+Connection
+close
+Content-Type
+application/json; charset=utf-8
+Authorization
+Token
+BODYraw
+{
+    "club_id": 1092471136,
+    "source_topic_id": null
+}
+
+
+Example Request
+Successful
+View More
+import http.client
+
+conn = http.client.HTTPSConnection("www.clubhouseapi.com")
+payload = "{\r\n    \"club_id\": 1092471136,\r\n    \"source_topic_id\": null\r\n}"
+headers = {
+  'CH-Languages': 'en-US',
+  'CH-Locale': 'en_US',
+  'Accept': 'application/json',
+  'Accept-Encoding': 'gzip, deflate',
+  'CH-AppBuild': '304',
+  'CH-AppVersion': '0.1.28',
+Example Response
+200 OK
+BodyHeader
+(15)
+View More
+{
+  "club": {
+    "club_id": 1092471136,
+    "name": "DevOps/SRE",
+    "description": "",
+    "photo_url": "https://clubhouseprod.s3.amazonaws.com:443/club_1092471136_1078fb23-db5c-4fdd-927b-0635d8390bdc_thumbnail_250x250",
+    "num_members": 65,
+    "num_followers": 744,
+    "enable_private": true,
+    "is_follow_allowed": true,
+    "is_membership_private": false,
+GETMembers
+https://www.clubhouseapi.com/api/get_club_members?club_id=1092471136&return_followers=1&return_members=1&page_size=100&page=1
+Get list of members on the given club_id.
+
+HEADERS
+CH-Languages
+en-US
+CH-Locale
+en_US
+Accept
+application/json
+Accept-Encoding
+gzip, deflate
+CH-AppBuild
+304
+CH-AppVersion
+0.1.28
+CH-UserID
+User-Agent
+clubhouse/304 (iPhone; iOS 14.4; Scale/2.00)
+Connection
+close
+Content-Type
+application/json; charset=utf-8
+Authorization
+Token
+PARAMS
+club_id
+1092471136
+return_followers
+1
+return_members
+1
+page_size
+100
+page
+1
+
+
+Example Request
+Successful
+View More
+import http.client
+
+conn = http.client.HTTPSConnection("www.clubhouseapi.com")
+payload = ''
+headers = {
+  'CH-Languages': 'en-US',
+  'CH-Locale': 'en_US',
+  'Accept': 'application/json',
+  'Accept-Encoding': 'gzip, deflate',
+  'CH-AppBuild': '304',
+  'CH-AppVersion': '0.1.28',
+Example Response
+200 OK
+BodyHeader
+(15)
+View More
+{
+  "users": [
+    {
+      "user_id": 1022096660,
+      "name": "Ehsan Khodadadi",
+      "photo_url": "https://clubhouseprod.s3.amazonaws.com:443/1022096660_c84ef578-9fb9-4cd3-a872-7f1f8da7a923_thumbnail_250x250",
+      "username": "ehsank777",
+      "bio": "SRE / DevOps engineer/consultant\nSoftware engineering consultant \nPython / AWS /…",
+      "is_admin": true,
+      "is_member": true,
+      "is_follower": false,
+POSTFollow
+https://www.clubhouseapi.com/api/follow_club
+Follow a club.
+
+HEADERS
+CH-Languages
+en-US
+CH-Locale
+en_US
+Accept
+application/json
+Accept-Encoding
+gzip, deflate
+CH-AppBuild
+304
+CH-AppVersion
+0.1.28
+CH-UserID
+User-Agent
+clubhouse/304 (iPhone; iOS 14.4; Scale/2.00)
+Connection
+close
+Content-Type
+application/json; charset=utf-8
+Authorization
+Token
+BODYraw
+{
+    "club_id": 1233549833,
+    "source_topic_id": null
+}
+
+
+Successful
+Example Request
+View More
+import http.client
+
+conn = http.client.HTTPSConnection("www.clubhouseapi.com")
+payload = "{\r\n    \"club_id\": 1233549833,\r\n    \"source_topic_id\": null\r\n}"
+headers = {
+  'CH-Languages': 'en-US',
+  'CH-Locale': 'en_US',
+  'Accept': 'application/json',
+  'Accept-Encoding': 'gzip, deflate',
+  'CH-AppBuild': '304',
+  'CH-AppVersion': '0.1.28',
+Example Response
+200 OK
+BodyHeader
+(14)
+{
+  "success": true
+}
+POSTUnfollow
+https://www.clubhouseapi.com/api/unfollow_club
+Unfollow a club.
+
+HEADERS
+CH-Languages
+en-US
+CH-Locale
+en_US
+Accept
+application/json
+Accept-Encoding
+gzip, deflate
+CH-AppBuild
+304
+CH-AppVersion
+0.1.28
+CH-UserID
+User-Agent
+clubhouse/304 (iPhone; iOS 14.4; Scale/2.00)
+Connection
+close
+Content-Type
+application/json; charset=utf-8
+Authorization
+Token
+BODYraw
+{
+    "club_id": 1233549833,
+    "source_topic_id": null
+}
+
+
+Example Request
+Successful
+View More
+import http.client
+
+conn = http.client.HTTPSConnection("www.clubhouseapi.com")
+payload = "{\r\n    \"club_id\": 1233549833,\r\n    \"source_topic_id\": null\r\n}"
+headers = {
+  'CH-Languages': 'en-US',
+  'CH-Locale': 'en_US',
+  'Accept': 'application/json',
+  'Accept-Encoding': 'gzip, deflate',
+  'CH-AppBuild': '304',
+  'CH-AppVersion': '0.1.28',
+Example Response
+200 OK
+BodyHeader
+(14)
+{
+  "success": true
+}
+×
+Example Response
+{
+  "users": [
+    {
+      "user_id": 1922512883,
+      "name": "Sadegh Khademi",
+      "photo_url": "https://clubhouseprod.s3.amazonaws.com:443/1922512883_efd8b254-f3a0-433b-98d8-905bd99af3c9_thumbnail_250x250",
+      "username": "niiiixd",
+      "last_active_minutes": 300,
+      "bio": "#devops #linux *nix sysadmin #cisco system engineer",
+      "twitter": null
+    },
+    {
+      "user_id": 380951076,
+      "name": "Zana Rostami",
+      "photo_url": "https://clubhouseprod.s3.amazonaws.com:443/380951076_fbd05ee4-3d3b-4018-b3bd-509223628fe2_thumbnail_250x250",
+      "username": "zanar74",
+      "last_active_minutes": 1320,
+      "bio": null,
+      "twitter": null
+    },
+    {
+      "user_id": 1075696108,
+      "name": "Nazanin  Qfn",
+      "photo_url": "https://clubhouseprod.s3.amazonaws.com:443/1075696108_6d0566d0-c21f-42df-b2ad-2ad5f5781ab0_thumbnail_250x250",
+      "username": "naziqfn",
+      "last_active_minutes": 1080,
+      "bio": "CS student",
+      "twitter": null
+    },
+    {
+      "user_id": 324511443,
+      "name": "Minaw Hassanzade",
+      "photo_url": "https://clubhouseprod.s3.amazonaws.com:443/324511443_3014cd96-6687-4a45-b540-52dd5be93807_thumbnail_250x250",
+      "username": "minaw_hss",
+      "last_active_minutes": 240,
+      "bio": "Electrical engineer 🔌\nShariaty university",
+      "twitter": null
+    },
+    {
+      "user_id": 595198656,
+      "name": "Erfan Tiam",
+      "photo_url": "https://clubhouseprod.s3.amazonaws.com:443/595198656_d1ac7121-bac0-43d7-b31d-46bfe7e447ee_thumbnail_250x250",
+      "username": "erfan.tiam13600",
+      "last_active_minutes": 960,
+      "bio": "فعال حوزه بازی و انیمیشن",
+      "twitter": null
+    },
+    {
+      "user_id": 389673305,
+      "name": "Mobina Ezzoddin",
+      "photo_url": "https://clubhouseprod.s3.amazonaws.com:443/389673305_f807270c-a6cd-469b-8826-ff63d00344e2_thumbnail_250x250",
+      "username": "m_ezzoddin",
+      "last_active_minutes": 660,
+      "bio": "🎓 Computer Engineering\n💻 Web developer \n📍Iran, Semnan \n\n🇩🇪 ✈️",
+      "twitter": "mezz_ir"
+    },
+    {
+      "user_id": 26579308,
+      "name": "Mohammad Mohammadjani",
+      "photo_url": "https://clubhouseprod.s3.amazonaws.com:443/26579308_23caa50f-d6ca-430c-97aa-f07f40b8881a_thumbnail_250x250",
+      "username": "mohammadmj92",
+      "last_active_minutes": null,
+      "bio": null,
+      "twitter": null
+    },
+    {
+      "user_id": 557771521,
+      "name": "Ali Qajarian",
+      "photo_url": "https://clubhouseprod.s3.amazonaws.com:443/557771521_b537c630-8be9-43bb-8a08-8ce9774a6879_thumbnail_250x250",
+      "username": "matexo",
+      "last_active_minutes": null,
+      "bio": "M.Sc AI 📚\nML DL researcher\nBack-end Dev 💻\nTehran 📍",
+      "twitter": null
+    },
+    {
+      "user_id": 325119962,
+      "name": "Mahboubeh Salimi",
+      "photo_url": "https://clubhouseprod.s3.amazonaws.com:443/325119962_09bf17c7-f0d0-43f8-83bb-2971c0b9c962_thumbnail_250x250",
+      "username": "msalimi23",
+      "last_active_minutes": null,
+      "bio": null,
+      "twitter": null
+    },
+    {
+      "user_id": 1322269570,
+      "name": "parisa mhr",
+      "photo_url": "https://clubhouseprod.s3.amazonaws.com:443/1322269570_1ee1cce5-46cd-41d2-b0f7-83b865fa4583_thumbnail_250x250",
+      "username": "parisamhrs",
+      "last_active_minutes": 46,
+      "bio": "🧸💌",
+      "twitter": null
+    },
+    {
+      "user_id": 803756102,
+      "name": "Milad Emad",
+      "photo_url": "https://clubhouseprod.s3.amazonaws.com:443/803756102_ad2eedb1-0d7f-47ec-a50d-0c051eff84fa_thumbnail_250x250",
+      "username": "milademad",
+      "last_active_minutes": null,
+      "bio": null,
+      "twitter": null
+    },
+    {
+      "user_id": 1834700975,
+      "name": "﮼‌مهدی ﮼‌رحیمی",
+      "photo_url": "https://clubhouseprod.s3.amazonaws.com:443/1834700975_7b3cfc61-efe0-40f2-8933-6c8eb2a43ada_thumbnail_250x250",
+      "username": "mehdirahimi",
+      "last_active_minutes": 660,
+      "bio": "📍﮼‌تهران\n📐﮼معمار",
+      "twitter": "WehdiRahimi"
+    },
+    {
+      "user_id": 1950904720,
+      "name": "Elyad khanbabayi",
+      "photo_url": "https://clubhouseprod.s3.amazonaws.com:443/1950904720_c4829e4e-f8e6-4dd7-be65-d4bb79318067_thumbnail_250x250",
+      "username": "elyad_9",
+      "last_active_minutes": 1020,
+      "bio": "M.S Mechanics \ntabriz©️\nPython\nLiverpool\nDistinction between past, present and f…",
+      "twitter": null
+    },
+    {
+      "user_id": 2096777286,
+      "name": "Amir Ghaffari",
+      "photo_url": "https://clubhouseprod.s3.amazonaws.com:443/2096777286_14f5f5d4-5a72-49dd-82f9-11a325c71657_thumbnail_250x250",
+      "username": "eamirgh",
+      "last_active_minutes": 1440,
+      "bio": "backend developer\nhttps://amirghaffari.com/",
+      "twitter": null
+    },
+    {
+      "user_id": 1200587227,
+      "name": "Sepehr Rajabi",
+      "photo_url": "https://clubhouseprod.s3.amazonaws.com:443/1200587227_f3c784c6-0ef8-4774-aebd-9aef28d685ef_thumbnail_250x250",
+      "username": "grainysepehr",
+      "last_active_minutes": null,
+      "bio": "Biotech stu\nAnalog syndrome",
+      "twitter": "Grainysepehr"
+    },
+    {
+      "user_id": 521769487,
+      "name": "Mehdi Shirvani",
+      "photo_url": "https://clubhouseprod.s3.amazonaws.com:443/521769487_4cd5a27c-08c4-4f80-9f14-d622d96d6d89_thumbnail_250x250",
+      "username": "mehdishirvani",
+      "last_active_minutes": null,
+      "bio": "MSc Mechanical Engineering",
+      "twitter": null
+    },
+    {
+      "user_id": 309513086,
+      "name": "Taha Farahani",
+      "photo_url": "https://clubhouseprod.s3.amazonaws.com:443/309513086_6777cdf1-a1c5-44fa-b553-9059c6369ae3_thumbnail_250x250",
+      "username": "tahacodes",
+      "last_active_minutes": 0,
+      "bio": "backend developer, *nix sysadmin, devops, sre\n\ntwitter: @tahacodes",
+      "twitter": null
+    },
+    {
+      "user_id": 109664647,
+      "name": "SamadiPour",
+      "photo_url": "https://clubhouseprod.s3.amazonaws.com:443/109664647_8c9191c5-663b-465c-b421-70fc553e683d_thumbnail_250x250",
+      "username": "samadipour",
+      "last_active_minutes": 540,
+      "bio": null,
+      "twitter": null
+    },
+    {
+      "user_id": 975542021,
+      "name": "Milad Rahimi",
+      "photo_url": "https://clubhouseprod.s3.amazonaws.com:443/975542021_3fa61fc8-a06a-45ad-b276-01e59e14b30b_thumbnail_250x250",
+      "username": "miladrahimi",
+      "last_active_minutes": 720,
+      "bio": "Software Engineer @ Snapp",
+      "twitter": "realmiladrahimi"
+    }
+  ],
+  "count": 19,
+  "next": null,
+  "previous": null,
+  "success": true
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
