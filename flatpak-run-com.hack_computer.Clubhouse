@@ -64,9 +64,7 @@ import http.client
 import json
 
 conn = http.client.HTTPSConnection("www.clubhouseapi.com")
-payload = json.dumps({
-  "phone_number": "+989123456789"
-})
+payload = json.dump
 headers = {
   'CH-Languages': 'en-US',
   'CH-Locale': 'en_US',
